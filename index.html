@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Khmer-Software</title>
+    <link rel="stylesheet" type="text/css" href="./assets/style/custom.css" />
+    <link rel="stylesheet" type="text/css" href="./assets/style/bootstrap.css" />
+  </head>
+  <body>
+    
+    <div id="fullscreen_bg" class="fullscreen_bg"/>
+      <div class="container">
+        <div class="form-signin" id="sigin" style="display: block;">
+          <h1 class="form-signin-heading text-muted">Sign In</h1>
+          <div class="form-group">
+            <input type="text" name="phonenumber" class="form-control" id="InputPhonenumber" aria-describedby="textHelp" placeholder="Enter Phonenumber" required="" autofocus="">
+          </div>
+          <div class="form-group">
+            <input type="password" name="password" class="form-control" id="InputPassword" aria-describedby="textHelp" placeholder="Enter Password" required="">
+          </div>        
+          <div class="form-group">
+            <button class="btn btn-lg btn-primary btn-block" id="buttonSigin" type="button">Sign In</button><br>
+            <button class="btn btn-lg btn-primary btn-block" id="buttonRegister" type="button" style="margin-top: -10px;">Register</button>
+          </div>
+        </div>
+
+        <div class="form-signin" id="register" style="display: none;" >
+          <h1 class="form-signin-heading text-muted">Register</h1>
+          <div class="form-group">
+            <input type="text" name="phonenumber" class="form-control" id="InputPhonenumber" aria-describedby="textHelp" placeholder="Enter Phonenumber" required="" autofocus="">
+          </div>
+          <div class="form-group">
+            <input type="password" name="password" class="form-control" id="InputPassword" aria-describedby="textHelp" placeholder="Enter Password" required="">
+          </div>    
+          <div class="form-group">
+            <input type="password" name="confirm-password" class="form-control" id="InputConfirm-Password" aria-describedby="textHelp" placeholder="Enter Confirm Password" required="">
+          </div>     
+          <div class="form-group">
+            <button class="btn btn-lg btn-primary btn-block" id="buttonRegister1" type="button">Register</button><br>
+            <button class="btn btn-lg btn-primary btn-block" id="buttonCancel" type="button" style="margin-top: -10px;">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Check Version -->
+    <!-- <script>console.log('We are using Node.js '+process.versions.node)</script>
+    <script>console.log('Chromium '+process.versions.chrome)</script>
+    <script>console.log('and Electron '+process.versions.electron)</script> -->
+    <!-- End Check Version -->
+   
+    <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+    <!-- <script type="text/javascript" src="./readerer_process/open-file.js"></script> -->
+    <script type="text/javascript" src="./assets/script/jquery.min.js"></script>  
+    <script type="text/javascript" src="./assets/script/bootstrap.min.js"></script> 
+    <script type="text/javascript" src="./assets/script/custom.js"></script>     
+    <script>if (window.module) module = window.module;</script>
+    <script>
+      // You can also require other files to run in this process
+      require('./renderer.js')
+    </script>
+
+    <script>
+      $("#buttonSigin").click(function(){
+        checkNull();
+        var phonenumber = $("#InputPhonenumber").val();
+        var password = $("#InputPassword").val();
+        buttonSingin(phonenumber,password);
+      })
+      function checkNull()
+      {
+          // Validation Input phonenumber
+        $("#InputPhonenumber").keydown(function (e) {
+            // Allow: backspace, delete, tab, escape, enter and .
+            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                // Allow: Ctrl+A, Command+A
+                (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+                // Allow: home, end, left, right, down, up
+                (e.keyCode >= 35 && e.keyCode <= 40)) {
+                    // let it happen, don't do anything
+                    return;
+            }
+            // Ensure that it is a number and stop the keypress
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+        });
+        if($("#InputPassword").val().length > 6) {
+          // alert("to long!")
+        }else{
+          // alert("gooooood size!");
+        }
+      }
+      function buttonSingin( phonenumber, password)
+      {
+        if(phonenumber == "" || password == "" || password.length < 6)
+        {
+          alert('Enter incorrect phonenumber or password, Please enter again!')
+        }else{
+         if(phonenumber == "086418931" && password == "123456"){
+           alert('.');
+         }
+        }
+      }
+     
+      $('#buttonSigin').click(function(e) {
+        console.log('Click buttonSigin')
+        $("#sigin").delay(100).fadeIn(100);
+        $("#register").fadeOut(100);
+        $('#register').removeClass('active');
+        $(this).addClass('active');
+        e.preventDefault();
+      });
+      $('#buttonRegister').click(function(e) {
+        console.log('Click buttonRegister')
+        $("#register").delay(100).fadeIn(100);
+        $("#sigin").fadeOut(100);
+        $('#sigin').removeClass('active');
+        $(this).addClass('active');
+        e.preventDefault();
+      });
+
+      $('#buttonCancel').click(function(e) {
+        console.log('Click buttonSigin')
+        $("#sigin").delay(100).fadeIn(100);
+        $("#register").fadeOut(100);
+        $('#register').removeClass('active');
+        $(this).addClass('active');
+        e.preventDefault();
+      });
+
+      $('#buttonRegister1').click(function(e) {
+        console.log('Click buttonSigin')
+        $("#sigin").delay(100).fadeIn(100);
+        $("#register").fadeOut(100);
+        $('#register').removeClass('active');
+        $(this).addClass('active');
+        e.preventDefault();
+      });
+
+    </script>
+  </body>
+</html>
